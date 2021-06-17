@@ -1,36 +1,37 @@
 #include <SDL.h>
-#include "game.h"
-
-Game *game;
+#include <iostream>
+#include <stdio.h>
 
 int main(int argc, char* args[]) {
+    SDL_Window* window;                    // Declare a pointer
 
-	const int FPS = 60;
-	const int frameDelay = 1000 / FPS;
+    SDL_Init(SDL_INIT_VIDEO);              // Initialize SDL2
 
-	Uint32 frameStart;
-	int frameTime;
+    // Create an application window with the following settings:
+    window = SDL_CreateWindow(
+        "An SDL2 window",                  // window title
+        SDL_WINDOWPOS_UNDEFINED,           // initial x position
+        SDL_WINDOWPOS_UNDEFINED,           // initial y position
+        640,                               // width, in pixels
+        480,                               // height, in pixels
+        0               // flags - see below
+    );
 
-	game = new Game();
-	game->init("Game Engine! :)", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 800, 600, false);
+    // Check that the window was successfully created
+    if (window == NULL) {
+        // In the case that the window could not be made...
+        printf("Could not create window: %s\n", SDL_GetError());
+        return 1;
+    }
 
-	while (game->running()) {
+    // The window is open: could enter program loop here (see SDL_PollEvent())
 
-		frameStart = SDL_GetTicks();
+    SDL_Delay(3000);  // Pause execution for 3000 milliseconds, for example
 
-		game->handleEvent();
-		game->update();
-		game->render();
+    // Close and destroy the window
+    SDL_DestroyWindow(window);
 
-		frameTime = SDL_GetTicks() - frameStart;
-
-		if (frameDelay > frameTime) {
-			SDL_Delay(frameDelay - frameTime);
-		}
-
-	}
-
-	game->clean();
-
-	return 0;
+    // Clean up
+    SDL_Quit();
+    return 0;
 }

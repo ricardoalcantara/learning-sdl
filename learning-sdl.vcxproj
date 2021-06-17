@@ -19,15 +19,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="src\game.cpp" />
-    <ClCompile Include="src\gameobject.cpp" />
     <ClCompile Include="src\main.cpp" />
-    <ClCompile Include="src\texturemanager.cpp" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="includes\game.h" />
-    <ClInclude Include="includes\gameobject.h" />
-    <ClInclude Include="includes\texturemanager.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
