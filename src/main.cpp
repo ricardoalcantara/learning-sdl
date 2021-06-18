@@ -7,7 +7,7 @@ Game* game;
 int main(int argc, char* args[]) {
 	game = new Game();
 
-	game->init("Game Engine", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 320, 320, false);
+	game->init("Game Engine", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 320, 176, false);
 
 	while (game->running()) {
 		game->handleEvents();
@@ -15,6 +15,6 @@ int main(int argc, char* args[]) {
 		game->render();
 	}
 	
-	game->clear();
+	//game->clear();
 	return 0;
 }

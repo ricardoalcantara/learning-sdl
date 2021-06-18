@@ -15,7 +15,7 @@ void Game::init(const char* title, int x, int y, int width, int height, bool ful
 		flags = SDL_WINDOW_FULLSCREEN;
 	}
 	if (SDL_Init(SDL_INIT_EVERYTHING) == 0) {
-		std::cout << "Started!......" << std::endl;
+		std::cout << "Starting systems..." << std::endl;
 		window = SDL_CreateWindow(title, x, y, width, height, flags);
 
 		if (window) {
@@ -37,10 +37,10 @@ void Game::init(const char* title, int x, int y, int width, int height, bool ful
 }
 
 void Game::clear() {
+	std::cout << "Game cleaned!" << std::endl;
 	SDL_DestroyWindow(window);
 	SDL_DestroyRenderer(renderer);
 	SDL_Quit();
-	std::cout << "Game cleaned!" << std::endl;
 }
 
 void Game::handleEvents() {
@@ -57,7 +57,8 @@ void Game::handleEvents() {
 }
 
 void Game::update() {
-
+	ticker++;
+	std::cout << "Tick: " << ticker << std::endl;
 }
 
 void Game::render() {
