@@ -1,6 +1,8 @@
 #include "game.h"
 #include <iostream>
 
+SDL_Texture* playerTex;
+
 Game::Game() {
 
 }
@@ -33,7 +35,9 @@ void Game::init(const char* title, int x, int y, int width, int height, bool ful
 		isRunning = false; 
 		std::cout << "Error! SDL had problems starting :(" << std::endl;
 	}
-
+	SDL_Surface* tmpSurface = IMG_Load("assets/player.png");
+	playerTex = SDL_CreateTextureFromSurface(renderer, tmpSurface);
+	SDL_FreeSurface(tmpSurface);
 }
 
 void Game::clear() {
@@ -64,7 +68,9 @@ void Game::update() {
 void Game::render() {
 	SDL_RenderClear(renderer);
 	//DRAW HERE
-	// 
+	
+	SDL_RenderCopy(renderer, playerTex, NULL, NULL);
+
 	//END DRAW
 	SDL_RenderPresent(renderer);
 }
