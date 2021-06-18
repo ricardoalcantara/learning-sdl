@@ -2,6 +2,7 @@
 #include <iostream>
 
 SDL_Texture* playerTex;
+SDL_Rect srcR, destR;
 
 Game::Game() {
 
@@ -62,6 +63,11 @@ void Game::handleEvents() {
 
 void Game::update() {
 	ticker++;
+	destR.w = 64;
+	destR.h = 48;
+	destR.x = ticker;
+	//destR.y = ticker;
+	
 	std::cout << "Tick: " << ticker << std::endl;
 }
 
@@ -69,7 +75,7 @@ void Game::render() {
 	SDL_RenderClear(renderer);
 	//DRAW HERE
 	
-	SDL_RenderCopy(renderer, playerTex, NULL, NULL);
+	SDL_RenderCopy(renderer, playerTex, NULL, &destR);
 
 	//END DRAW
 	SDL_RenderPresent(renderer);
