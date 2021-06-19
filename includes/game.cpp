@@ -12,6 +12,8 @@ Game::~Game() {
 
 }
 
+int scale = 1;
+
 void Game::init(const char* title, int x, int y, int width, int height, bool fullscreen) {
 	int flags = 0;
 	if (fullscreen) {
@@ -19,7 +21,7 @@ void Game::init(const char* title, int x, int y, int width, int height, bool ful
 	}
 	if (SDL_Init(SDL_INIT_EVERYTHING) == 0) {
 		std::cout << "Starting systems..." << std::endl;
-		window = SDL_CreateWindow(title, x, y, width, height, flags);
+		window = SDL_CreateWindow(title, x, y, width * scale, height * scale, flags);
 
 		if (window) {
 			std::cout << "Window created!" << std::endl;
@@ -29,6 +31,8 @@ void Game::init(const char* title, int x, int y, int width, int height, bool ful
 			SDL_SetRenderDrawColor(renderer, 255, 0, 0, 255);
 			std::cout << "Renderer created!" << std::endl;
 		}
+
+		SDL_RenderSetLogicalSize(renderer, width, height);
 		
 		isRunning = true;
 	}
@@ -38,7 +42,6 @@ void Game::init(const char* title, int x, int y, int width, int height, bool ful
 	}
 	SDL_Surface* tmpSurface = IMG_Load("assets/player.png");
 	playerTex = SDL_CreateTextureFromSurface(renderer, tmpSurface);
-	SDL_FreeSurface(tmpSurface);
 }
 
 void Game::clear() {
@@ -65,7 +68,7 @@ void Game::update() {
 	ticker++;
 	destR.w = 64;
 	destR.h = 48;
-	destR.x = ticker;
+	destR.x = ticker / 20;
 	//destR.y = ticker;
 	
 	std::cout << "Tick: " << ticker << std::endl;
