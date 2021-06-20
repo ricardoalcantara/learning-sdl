@@ -1,5 +1,5 @@
 #include "game.h"
-#include <iostream>
+#include "texturemanager.h"
 
 SDL_Texture* playerTex;
 SDL_Rect srcR, destR;
@@ -40,8 +40,7 @@ void Game::init(const char* title, int x, int y, int width, int height, bool ful
 		isRunning = false; 
 		std::cout << "Error! SDL had problems starting :(" << std::endl;
 	}
-	SDL_Surface* tmpSurface = IMG_Load("assets/player.png");
-	playerTex = SDL_CreateTextureFromSurface(renderer, tmpSurface);
+	playerTex = TextureManager::LoadTexture("assets/player.png", renderer);
 }
 
 void Game::clear() {

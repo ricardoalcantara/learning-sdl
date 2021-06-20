@@ -1,6 +1,6 @@
-#include <SDL.h>
 #include <iostream>
 #include "game.h"
+#include "texturemanager.h"
 
 Game* game;
 
