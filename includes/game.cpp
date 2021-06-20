@@ -9,10 +9,10 @@ Game::Game() {
 }
 
 Game::~Game() {
-
+	SDL_Quit();
 }
 
-int scale = 1;
+int scale = 2;
 
 void Game::init(const char* title, int x, int y, int width, int height, bool fullscreen) {
 	int flags = 0;
@@ -66,9 +66,9 @@ void Game::handleEvents() {
 
 void Game::update() {
 	ticker++;
-	destR.w = 64;
-	destR.h = 48;
-	destR.x = ticker / 20;
+	destR.w = 16;
+	destR.h = 16;
+	destR.x = ticker / 5;
 	//destR.y = ticker;
 	
 	std::cout << "Tick: " << ticker << std::endl;
