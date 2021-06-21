@@ -387,3 +387,13 @@ FodyWeavers.xsd
 # JetBrains Rider
 .idea/
 *.sln.iml
+
+# CMake
+build/
+out/
+
+
+# .vscode
+.vscode/
+!.vscode/launch.json
+!.vs/launch.vs.json
