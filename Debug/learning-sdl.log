@@ -1,6 +1,3 @@
-﻿  game.cpp
-  main.cpp
-C:\Users\Pichau\source\repos\learning-sdl\learning-sdl\src\main.cpp(10,32): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
-  texturemanager.cpp
-  Generating Code...
+﻿  gameobject.cpp
+Debug\gameobject.obj : warning LNK4042: object specified more than once; extras ignored
   learning-sdl.vcxproj -> C:\Users\Pichau\source\repos\learning-sdl\Debug\learning-sdl.exe

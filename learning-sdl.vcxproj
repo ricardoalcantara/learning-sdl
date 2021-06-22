@@ -19,13 +19,15 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="includes\game.cpp" />
+    <ClCompile Include="src\game.cpp" />
+    <ClCompile Include="include\gameobject.h" />
+    <ClCompile Include="src\gameobject.cpp" />
     <ClCompile Include="src\main.cpp" />
     <ClCompile Include="src\texturemanager.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="includes\game.h" />
-    <ClInclude Include="includes\texturemanager.h" />
+    <ClInclude Include="include\game.h" />
+    <ClInclude Include="include\texturemanager.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
@@ -81,7 +83,7 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
-    <IncludePath>C:\Development\SDL2\include;C:\Users\Pichau\source\repos\learning-sdl\learning-sdl\includes;C:\Development\SDL2_image-2.0.5\include;$(IncludePath)</IncludePath>
+    <IncludePath>C:\Development\SDL2\include;C:\Users\Pichau\source\repos\learning-sdl\learning-sdl\include;C:\Development\SDL2_image-2.0.5\include;$(IncludePath)</IncludePath>
     <LibraryPath>C:\Development\SDL2\lib\x86;C:\Development\SDL2_image-2.0.5\lib\x86;$(LibraryPath)</LibraryPath>
     <IgnoreImportLibrary>true</IgnoreImportLibrary>
   </PropertyGroup>
@@ -100,7 +102,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>C:\Development\SDL2\include;C:\Development\SDL2_image-2.0.5\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Development\SDL2\include;C:\Development\SDL2_image-2.0.5\include;C:\Users\Pichau\source\repos\learning-sdl\learning-sdl\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
