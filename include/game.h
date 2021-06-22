@@ -22,7 +22,7 @@ public:
 	}
 
 private:
-	int ticker;
+	int ticker = 0;
 	bool isRunning;
 	SDL_Window* window;
 	SDL_Renderer* renderer;

@@ -11,7 +11,7 @@ int main(int argc, char* args[]) {
 
 	Uint32 frameStart;
 	int frameTime;
-
+	std::cout << SDL_GetBasePath() << std::endl;
 	game = new Game();
 	game->init("Game Engine", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 320, 176, false);
 
