@@ -1,5 +1,8 @@
 #include "game.h"
 #include "texturemanager.h"
+#include "gameobject.h" // test
+
+GameObject* player;
 
 SDL_Texture* playerTex;
 SDL_Rect srcR, destR;
@@ -40,7 +43,7 @@ void Game::init(const char* title, int x, int y, int width, int height, bool ful
 		isRunning = false; 
 		std::cout << "Error! SDL had problems starting :(" << std::endl;
 	}
-	playerTex = TextureManager::LoadTexture("assets/player.png", renderer);
+	player = new GameObject("assets/player.png", renderer);
 }
 
 void Game::clear() {
@@ -64,20 +67,14 @@ void Game::handleEvents() {
 }
 
 void Game::update() {
-	ticker++;
-	destR.w = 16;
-	destR.h = 16;
-	destR.x = ticker / 5;
-	//destR.y = ticker;
-	
-	std::cout << "Tick: " << ticker << std::endl;
+	player->update();
 }
 
 void Game::render() {
 	SDL_RenderClear(renderer);
 	//DRAW HERE
 	
-	SDL_RenderCopy(renderer, playerTex, NULL, &destR);
+	player->render();
 
 	//END DRAW
 	SDL_RenderPresent(renderer);
