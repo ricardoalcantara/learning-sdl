@@ -1,5 +1,5 @@
 #include <iostream>
-#include "game/game.h"
+#include "core/game.h"
 #include "core/texturemanager.h"
 
 Game* game;

@@ -1,8 +1,11 @@
-#include "game/game.h"
+#include "core/game.h"
 #include "core/texturemanager.h"
-#include "core/gameobject.h" // test
+#include "core/gameobject.h" 
+#include "core/map.h"
 
 GameObject* player;
+SDL_Renderer* Game::renderer = nullptr;
+Map* map;
 
 SDL_Texture* playerTex;
 SDL_Rect srcR, destR;
@@ -42,7 +45,8 @@ void Game::init(const char* title, int x, int y, int width, int height, bool ful
 		isRunning = false; 
 		std::cout << "Error! SDL had problems starting :(" << std::endl;
 	}
-	player = new GameObject("assets/player.png", renderer);
+	player = new GameObject("assets/player.png", 32, 32);
+	map = new Map();
 }
 
 void Game::clear() {
@@ -74,6 +78,7 @@ void Game::render() {
 	//DRAW HERE
 	
 	player->render();
+	map->DrawMap();
 
 	//END DRAW
 	SDL_RenderPresent(renderer);

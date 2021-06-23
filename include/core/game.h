@@ -20,14 +20,13 @@ public:
 	bool running() {
 		return isRunning;
 	}
+	static SDL_Renderer* renderer;
+
 
 private:
 	int ticker = 0;
 	bool isRunning;
 	SDL_Window* window;
-	SDL_Renderer* renderer;
-
-
 };
 
 #endif 
