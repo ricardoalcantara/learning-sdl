@@ -44,8 +44,8 @@ include_directories(
 add_executable(learning-sdl
     src/main.cpp
     src/game.cpp
-    src/texturemanager.cpp
-    src/gameobject.cpp
+    "src/core/texturemanager.cpp"
+    "src/core/gameobject.cpp"
 )
 
 target_link_libraries(learning-sdl ${SDL2_LIBRARIES} ${SDL2IMAGE_LIBRARIES})

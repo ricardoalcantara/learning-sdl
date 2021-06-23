@@ -1,5 +1,5 @@
-#include "gameobject.h"
-#include "texturemanager.h"
+#include "core/gameobject.h"
+#include "core/texturemanager.h"
 
 GameObject::GameObject(const char* texturesheet, SDL_Renderer* ren) {
 	renderer = ren;

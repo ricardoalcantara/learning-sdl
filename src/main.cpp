@@ -1,6 +1,6 @@
 #include <iostream>
-#include "game.h"
-#include "texturemanager.h"
+#include "game/game.h"
+#include "core/texturemanager.h"
 
 Game* game;
 

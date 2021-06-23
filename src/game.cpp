@@ -1,6 +1,6 @@
-#include "game.h"
-#include "texturemanager.h"
-#include "gameobject.h" // test
+#include "game/game.h"
+#include "core/texturemanager.h"
+#include "core/gameobject.h" // test
 
 GameObject* player;
 
@@ -8,7 +8,6 @@ SDL_Texture* playerTex;
 SDL_Rect srcR, destR;
 
 Game::Game() {
-
 }
 
 Game::~Game() {
