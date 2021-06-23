@@ -1,7 +1,7 @@
 #include <iostream>
 #include "core/game.h"
 #include "core/texturemanager.h"
-#include "sandboxstate.h"
+#include "game/sandboxstate.h"
 
 Game* game;
 
@@ -16,11 +16,9 @@ int main(int argc, char* args[]) {
 	game = new Game();
 	game->init("Game Engine", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 320, 176, false);
 
+	game->GetGameStateManager()->addState<SandboxState>("main");
+	game->GetGameStateManager()->loadState("");
 	// game->addState<SandboxState>("main");
-	game->loadState("main");
-
-	if (game->isStateLoaded("main"))
-		game->selectState("main");
 
 	while (game->running()) {
 

@@ -52,7 +52,8 @@ add_executable(learning-sdl
     src/game.cpp
     src/core/texturemanager.cpp
     src/core/gameobject.cpp
-    src/sandboxstate.cpp
+    src/core/gamestatemanager.cpp
+    src/game/sandboxstate.cpp
 )
 >>>>>>> 69a4aca (Begin implementation)
 

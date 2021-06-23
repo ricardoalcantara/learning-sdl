@@ -1,21 +1,21 @@
 #ifndef SANDBOXSTATE_H
 #define SANDBOXSTATE_H
 
-#include "gamestate.h"
+#include "core/gamestate.h"
 #include "core/gameobject.h"
 // #include <SDL.h>
 
 class SandboxState : public GameState
 {
 public:
-    SandboxState(SDL_Renderer * renderer);
+    SandboxState();
     ~SandboxState();
-    void load() override;
+    void load(SDL_Renderer *renderer) override;
     bool isLoaded() override;
     void update() override;
     void render() override;
 
-private:
+public:
     GameObject *player;
 };
 
