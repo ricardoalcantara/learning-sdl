@@ -1,7 +1,6 @@
-#include "core/game.h"
-
 #ifndef MAP_H
 #define MAP_H
+#include "core/game.h"
 
 //to end
 
