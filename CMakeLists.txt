@@ -45,7 +45,7 @@ add_executable(learning-sdl
     src/main.cpp
     src/core/game.cpp
     src/core/map.cpp
-    src/core/texturemanager.cpp
+    "src/core/assetsmanager.cpp"
     src/core/gameobject.cpp
     src/core/gamestatemanager.cpp
     src/game/sandboxstate.cpp

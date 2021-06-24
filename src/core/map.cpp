@@ -1,5 +1,5 @@
 #include "core/map.h"
-#include "core/texturemanager.h"
+#include "core/assetsmanager.h"
 
 //level test
 
@@ -19,8 +19,8 @@ int lvl1[11][10] = {
 };
 
 Map::Map() {
-	floor = TextureManager::LoadTexture("assets/testFloor.png");
-	air = TextureManager::LoadTexture("assets/testAir.png");
+	floor = AssetsManager::LoadTexture("assets/testFloor.png");
+	air = AssetsManager::LoadTexture("assets/testAir.png");
 
 	LoadMap(lvl1); // test
 	src.x = 0;
@@ -49,10 +49,10 @@ void Map::DrawMap() {
 			switch (tileIndex)
 			{
 			case 0:
-				TextureManager::Draw(air, src, dest);
+				AssetsManager::Draw(air, src, dest);
 				break;
 			case 1:
-				TextureManager::Draw(floor, src, dest);
+				AssetsManager::Draw(floor, src, dest);
 				break;
 			default:
 				break;

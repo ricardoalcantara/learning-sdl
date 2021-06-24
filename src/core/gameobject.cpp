@@ -1,8 +1,8 @@
 #include "core/gameobject.h"
-#include "core/texturemanager.h"
+#include "core/assetsmanager.h"
 
 GameObject::GameObject(const char* texturesheet, int x, int y) {
-	objTexture = TextureManager::LoadTexture(texturesheet);
+	objTexture = AssetsManager::LoadTexture(texturesheet);
 	xpos = x;
 	ypos = y;
 }
