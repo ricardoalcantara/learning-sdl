@@ -1,6 +1,6 @@
-#include "core/texturemanager.h"
+#include "core/assetsmanager.h"
 
-SDL_Texture *TextureManager::LoadTexture(const char *fileName)
+SDL_Texture *AssetsManager::LoadTexture(const char *fileName)
 {
 	SDL_Surface *tempSurface = IMG_Load(fileName);
 
@@ -15,7 +15,7 @@ SDL_Texture *TextureManager::LoadTexture(const char *fileName)
 	return tex;
 }
 
-TTF_Font *TextureManager::LoadFont(const char *fileName, int size)
+TTF_Font *AssetsManager::LoadFont(const char *fileName, int size)
 {
 	TTF_Font *font;
 	font = TTF_OpenFont(fileName, size);
@@ -27,7 +27,7 @@ TTF_Font *TextureManager::LoadFont(const char *fileName, int size)
 	return font;
 }
 
-void TextureManager::Draw(SDL_Texture *tex, SDL_Rect src, SDL_Rect dest)
+void AssetsManager::Draw(SDL_Texture *tex, SDL_Rect src, SDL_Rect dest)
 {
 	SDL_RenderCopy(Game::renderer, tex, &src, &dest);
 }

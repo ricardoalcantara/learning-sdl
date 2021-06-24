@@ -1,12 +1,11 @@
-#include "core/game.h"
 
-#ifndef TEXTUREMANAGER_H
-#define TEXTUREMANAGER_H
+#ifndef ASSETSMANAGER_H
+#define ASSETSMANAGER_H
+#include "core/game.h"
 
 #include <SDL_ttf.h>
 
-class TextureManager
-{
+class AssetsManager {
 public:
 	static SDL_Texture *LoadTexture(const char *fileName);
 	static TTF_Font *LoadFont(const char *fileName, int size);

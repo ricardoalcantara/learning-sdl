@@ -1,6 +1,6 @@
 #include <iostream>
 #include "core/game.h"
-#include "core/texturemanager.h"
+#include "core/assetsmanager.h"
 #include "game/sandboxstate.h"
 #include "game/mapstate.h"
 

@@ -1,7 +1,6 @@
-#include "core/game.h"
-
 #ifndef GAMEOBJECT_H
 #define GAMEOBJECT_H
+#include "core/game.h"
 
 class GameObject {
 public:
