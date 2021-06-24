@@ -3,7 +3,8 @@
 
 #include "core/gamestate.h"
 #include "core/gameobject.h"
-// #include <SDL.h>
+#include "ui/label.h"
+#include "ui/button.h"
 
 class SandboxState : public GameState
 {
@@ -17,6 +18,8 @@ public:
 
 public:
     GameObject *player;
+    Label *label;
+    Button *button;
 };
 
 #endif // !SANDBOXSTATE;
