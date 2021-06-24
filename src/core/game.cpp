@@ -17,10 +17,13 @@ Game::~Game()
 	SDL_Quit();
 }
 
-int scale = 2;
-
-void Game::init(const char *title, int x, int y, int width, int height, bool fullscreen)
+void Game::init(const char *title, int x, int y, int scale, bool fullscreen)
 {
+
+	scale = scale;
+	static int width = 320;
+	static int height = 176;
+
 	int flags = 0;
 	if (fullscreen)
 	{

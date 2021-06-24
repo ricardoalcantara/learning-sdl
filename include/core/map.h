@@ -11,6 +11,7 @@ public:
 
 	void LoadMap(int arr[11][10]); //test
 	void DrawMap();
+	static void Draw(SDL_Texture* tex, SDL_Rect src, SDL_Rect dest);
 
 private:
 
