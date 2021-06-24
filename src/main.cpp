@@ -5,6 +5,8 @@
 
 Game* game;
 
+enum GameStateEnum { Sandbox = 0 };
+
 int main(int argc, char* args[]) {
 
 	const int FPS = 60;
@@ -16,8 +18,8 @@ int main(int argc, char* args[]) {
 	game = new Game();
 	game->init("Game Engine", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 320, 176, false);
 
-	game->GetGameStateManager()->addState<SandboxState>("main");
-	game->GetGameStateManager()->loadState("");
+	game->GetGameStateManager()->addState( GameStateEnum::Sandbox, new SandboxState());
+	game->GetGameStateManager()->loadState(GameStateEnum::Sandbox);
 	// game->addState<SandboxState>("main");
 
 	while (game->running()) {

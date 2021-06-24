@@ -1,6 +1,7 @@
 #ifndef GAMESTATEMANAGER_H
 #define GAMESTATEMANAGER_H
 
+#include <map>
 #include "game/game.h"
 
 class Game;
@@ -12,12 +13,8 @@ public:
     GameStateManager(Game*);
     ~GameStateManager();
 
-	template <class T>
-	void addState(const char*)
-	{
-		currentGameState = new T();
-	}
-	void loadState(const char*);
+	void addState(int, GameState*);
+	void loadState(int);
 	bool isStateLoaded(const char*);
 	void selectState(const char*);
 	GameState* getCurrentState()
@@ -26,6 +23,7 @@ public:
 	}
 private:
 	Game* game;
+	std::map<int, GameState*> gameStates;
 	GameState* currentGameState;
 
 };
