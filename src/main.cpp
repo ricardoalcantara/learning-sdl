@@ -17,7 +17,7 @@ int main(int argc, char* args[]) {
 	int frameTime;
 	std::cout << SDL_GetBasePath() << std::endl;
 	game = new Game();
-	game->init("Game Engine", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 320, 176, false);
+	game->init("Game Engine", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 2, false);
 
 	game->GetGameStateManager()->addState( GameStateEnum::Sandbox, new SandboxState());
 	game->GetGameStateManager()->addState( GameStateEnum::Map, new MapState());

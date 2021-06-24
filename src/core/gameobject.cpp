@@ -18,9 +18,9 @@ void GameObject::update() {
 
 	destRect.x = xpos;
 	destRect.y = ypos;
-	//upscaled
-	destRect.w = srcRect.w * 2;
-	destRect.h = srcRect.h * 2;
+
+	destRect.w = srcRect.w;
+	destRect.h = srcRect.h;
 }
 
 void GameObject::render() {

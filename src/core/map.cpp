@@ -18,6 +18,10 @@ int lvl1[11][10] = {
 	{1, 1, 1, 1, 1, 1, 1, 1, 1, 1} // 1 is floor
 };
 
+void Map::Draw(SDL_Texture* tex, SDL_Rect src, SDL_Rect dest) {
+	SDL_RenderCopy(Game::renderer, tex, &src, &dest);
+}
+
 Map::Map() {
 	floor = AssetsManager::LoadTexture("assets/testFloor.png");
 	air = AssetsManager::LoadTexture("assets/testAir.png");
@@ -49,10 +53,10 @@ void Map::DrawMap() {
 			switch (tileIndex)
 			{
 			case 0:
-				AssetsManager::Draw(air, src, dest);
+				Map::Draw(air, src, dest);
 				break;
 			case 1:
-				AssetsManager::Draw(floor, src, dest);
+				Map::Draw(floor, src, dest);
 				break;
 			default:
 				break;

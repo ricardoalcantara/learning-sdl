@@ -15,7 +15,7 @@ public:
 	Game(); // constructor
 	~Game(); // destroyer
 
-	void init(const char* title, int x, int y, int width, int height, bool fullscreen);
+	void init(const char* title, int x, int y, int scale, bool fullscreen);
 
 	void handleEvents();
 	void update();
@@ -35,7 +35,9 @@ public:
 
 private:
 	int ticker = 0;
+	int scale = 1;
 	bool isRunning;
+
 	SDL_Window* window;
 	GameStateManager* gameStateManager;
 };
