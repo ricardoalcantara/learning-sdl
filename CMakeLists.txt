@@ -49,6 +49,7 @@ add_executable(learning-sdl
     src/core/gameobject.cpp
     src/core/gamestatemanager.cpp
     src/game/sandboxstate.cpp
+    src/game/mapstate.cpp
 )
 
 target_link_libraries(learning-sdl ${SDL2_LIBRARIES} ${SDL2IMAGE_LIBRARIES})

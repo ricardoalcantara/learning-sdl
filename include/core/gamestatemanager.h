@@ -15,8 +15,8 @@ public:
 
 	void addState(int, GameState*);
 	void loadState(int);
-	bool isStateLoaded(const char*);
-	void selectState(const char*);
+	bool isStateLoaded(int);
+	void selectState(int);
 	GameState* getCurrentState()
 	{
 		return currentGameState;

@@ -2,10 +2,11 @@
 #include "core/game.h"
 #include "core/texturemanager.h"
 #include "game/sandboxstate.h"
+#include "game/mapstate.h"
 
 Game* game;
 
-enum GameStateEnum { Sandbox = 0 };
+enum GameStateEnum { Sandbox = 0, Map = 1 };
 
 int main(int argc, char* args[]) {
 
@@ -19,8 +20,11 @@ int main(int argc, char* args[]) {
 	game->init("Game Engine", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 320, 176, false);
 
 	game->GetGameStateManager()->addState( GameStateEnum::Sandbox, new SandboxState());
+	game->GetGameStateManager()->addState( GameStateEnum::Map, new MapState());
+	
+	// Should load only one at time
 	game->GetGameStateManager()->loadState(GameStateEnum::Sandbox);
-	// game->addState<SandboxState>("main");
+	game->GetGameStateManager()->loadState(GameStateEnum::Map);
 
 	while (game->running()) {
 

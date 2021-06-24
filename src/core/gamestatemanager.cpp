@@ -25,17 +25,20 @@ void GameStateManager::loadState(int id)
 	if (search != gameStates.end())
 	{
 		currentGameState = search->second;
-	}
-
-	if (currentGameState)
 		currentGameState->load();
+	}
 }
 
-bool GameStateManager::isStateLoaded(const char *)
+bool GameStateManager::isStateLoaded(int id)
 {
 	return currentGameState && currentGameState->isLoaded();
 }
 
-void GameStateManager::selectState(const char *)
+void GameStateManager::selectState(int id)
 {
+	auto search = gameStates.find(id);
+	if (search != gameStates.end())
+	{
+		currentGameState = search->second;
+	}
 }
