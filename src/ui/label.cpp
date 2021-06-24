@@ -1,5 +1,5 @@
 #include "ui/label.h"
-#include "core/texturemanager.h"
+#include "core/assetsmanager.h"
 
 Label::Label()
 {
