@@ -1,7 +1,7 @@
 #include "core/gamestatemanager.h"
 #include "core/gamestate.h"
 
-GameStateManager::GameStateManager(Game *_game) : game(_game)
+GameStateManager::GameStateManager()
 {
 }
 
@@ -28,7 +28,7 @@ void GameStateManager::loadState(int id)
 	}
 
 	if (currentGameState)
-		currentGameState->load(game->renderer);
+		currentGameState->load();
 }
 
 bool GameStateManager::isStateLoaded(const char *)

@@ -2,7 +2,7 @@
 #define GAMESTATEMANAGER_H
 
 #include <map>
-#include "game/game.h"
+#include "core/game.h"
 
 class Game;
 class GameState;
@@ -10,7 +10,7 @@ class GameState;
 class GameStateManager
 {
 public:
-    GameStateManager(Game*);
+    GameStateManager();
     ~GameStateManager();
 
 	void addState(int, GameState*);

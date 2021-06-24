@@ -5,8 +5,8 @@
 #include <SDL_image.h>
 #include <iostream>
 
-#include "core/gamestate.h"
 #include "core/gamestatemanager.h"
+#include "core/gamestate.h"
 
 class GameStateManager;
 
@@ -25,29 +25,19 @@ public:
 	bool running() {
 		return isRunning;
 	}
-	static SDL_Renderer* renderer;
-
 
 	GameStateManager* GetGameStateManager() const
 	{
 		return gameStateManager;
 	}
 
+	static SDL_Renderer* renderer;
+
 private:
 	int ticker = 0;
 	bool isRunning;
 	SDL_Window* window;
-<<<<<<< HEAD:include/core/game.h
-<<<<<<< HEAD:include/core/game.h
-=======
-	SDL_Renderer* renderer;
-	GameState* currentGameState;
->>>>>>> 69a4aca (Begin implementation):include/game/game.h
-=======
 	GameStateManager* gameStateManager;
-public:
-	SDL_Renderer* renderer;
->>>>>>> 75f82dd (running):include/game/game.h
 };
 
 #endif 

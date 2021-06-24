@@ -43,19 +43,13 @@ include_directories(
 
 add_executable(learning-sdl
     src/main.cpp
-<<<<<<< HEAD
-    "src/core/game.cpp"
-    "src/core/texturemanager.cpp"
-    "src/core/gameobject.cpp"
- "include/core/map.h" "src/core/map.cpp")
-=======
-    src/game.cpp
+    src/core/game.cpp
+    src/core/map.cpp
     src/core/texturemanager.cpp
     src/core/gameobject.cpp
     src/core/gamestatemanager.cpp
     src/game/sandboxstate.cpp
 )
->>>>>>> 69a4aca (Begin implementation)
 
 target_link_libraries(learning-sdl ${SDL2_LIBRARIES} ${SDL2IMAGE_LIBRARIES})
 

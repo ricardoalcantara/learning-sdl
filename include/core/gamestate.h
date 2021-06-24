@@ -7,7 +7,7 @@ class GameState
 {
 public:
 public:
-    virtual void load(SDL_Renderer *renderer) = 0;
+    virtual void load() = 0;
     virtual bool isLoaded() = 0;
     virtual void update() = 0;
     virtual void render() = 0;

@@ -1,27 +1,13 @@
 #include "core/game.h"
 #include "core/texturemanager.h"
-#include "core/gameobject.h" 
+#include "core/gameobject.h"
 #include "core/map.h"
 
-<<<<<<< HEAD:src/core/game.cpp
-<<<<<<< HEAD:src/core/game.cpp
-GameObject* player;
 SDL_Renderer* Game::renderer = nullptr;
-Map* map;
-
-SDL_Texture* playerTex;
-SDL_Rect srcR, destR;
-
-=======
->>>>>>> 69a4aca (Begin implementation):src/game.cpp
-Game::Game() {
-=======
-#include "core/gamestatemanager.h"
 
 Game::Game()
 {
-	gameStateManager = new GameStateManager(this);
->>>>>>> 75f82dd (running):src/game.cpp
+	gameStateManager = new GameStateManager();
 }
 
 Game::~Game()
@@ -63,11 +49,7 @@ void Game::init(const char *title, int x, int y, int width, int height, bool ful
 		isRunning = false;
 		std::cout << "Error! SDL had problems starting :(" << std::endl;
 	}
-<<<<<<< HEAD:src/core/game.cpp
-	player = new GameObject("assets/player.png", 32, 32);
-	map = new Map();
-=======
->>>>>>> 69a4aca (Begin implementation):src/game.cpp
+	// map = new Map();
 }
 
 void Game::clear()
@@ -102,19 +84,8 @@ void Game::render()
 {
 	SDL_RenderClear(renderer);
 	//DRAW HERE
-<<<<<<< HEAD:src/core/game.cpp
-	
-<<<<<<< HEAD:src/core/game.cpp
-	player->render();
-	map->DrawMap();
-=======
-	if (currentGameState)
-		currentGameState->render();
->>>>>>> 69a4aca (Begin implementation):src/game.cpp
-=======
 
 	gameStateManager->getCurrentState()->render();
->>>>>>> 75f82dd (running):src/game.cpp
 
 	//END DRAW
 	SDL_RenderPresent(renderer);

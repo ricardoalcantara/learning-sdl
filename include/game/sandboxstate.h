@@ -10,7 +10,7 @@ class SandboxState : public GameState
 public:
     SandboxState();
     ~SandboxState();
-    void load(SDL_Renderer *renderer) override;
+    void load() override;
     bool isLoaded() override;
     void update() override;
     void render() override;
