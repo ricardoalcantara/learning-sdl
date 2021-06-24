@@ -3,7 +3,9 @@
 #include "core/gameobject.h"
 #include "core/map.h"
 
-SDL_Renderer* Game::renderer = nullptr;
+#include <SDL_ttf.h>
+
+SDL_Renderer *Game::renderer = nullptr;
 
 Game::Game()
 {
@@ -39,7 +41,6 @@ void Game::init(const char *title, int x, int y, int scale, bool fullscreen)
 		renderer = SDL_CreateRenderer(window, -1, 0);
 		if (renderer)
 		{
-			SDL_SetRenderDrawColor(renderer, 255, 0, 0, 255);
 			std::cout << "Renderer created!" << std::endl;
 		}
 
@@ -52,12 +53,18 @@ void Game::init(const char *title, int x, int y, int scale, bool fullscreen)
 		isRunning = false;
 		std::cout << "Error! SDL had problems starting :(" << std::endl;
 	}
-	// map = new Map();
+
+	if (TTF_Init() == -1)
+	{
+		std::cout << "TTF_Init: " << TTF_GetError() << std::endl;
+		isRunning = false;
+	}
 }
 
 void Game::clear()
 {
 	std::cout << "Game cleaned!" << std::endl;
+	TTF_Quit();
 	SDL_DestroyWindow(window);
 	SDL_DestroyRenderer(renderer);
 	SDL_Quit();
@@ -85,6 +92,7 @@ void Game::update()
 
 void Game::render()
 {
+	SDL_SetRenderDrawColor(renderer, 135, 206, 250, 255);
 	SDL_RenderClear(renderer);
 	//DRAW HERE
 
