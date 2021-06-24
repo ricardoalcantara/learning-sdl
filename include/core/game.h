@@ -5,6 +5,11 @@
 #include <SDL_image.h>
 #include <iostream>
 
+#include "core/gamestatemanager.h"
+#include "core/gamestate.h"
+
+class GameStateManager;
+
 class Game {
 public: 
 	Game(); // constructor
@@ -20,13 +25,19 @@ public:
 	bool running() {
 		return isRunning;
 	}
-	static SDL_Renderer* renderer;
 
+	GameStateManager* GetGameStateManager() const
+	{
+		return gameStateManager;
+	}
+
+	static SDL_Renderer* renderer;
 
 private:
 	int ticker = 0;
 	bool isRunning;
 	SDL_Window* window;
+	GameStateManager* gameStateManager;
 };
 
 #endif 
