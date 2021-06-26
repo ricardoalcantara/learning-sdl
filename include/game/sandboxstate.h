@@ -13,7 +13,7 @@ public:
     SandboxState();
     ~SandboxState();
     void load() override;
-    bool isLoaded() override;
+    void ready() override;
     void update() override;
     void render() override;
 

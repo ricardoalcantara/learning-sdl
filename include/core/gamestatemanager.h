@@ -3,29 +3,34 @@
 
 #include <map>
 #include "core/game.h"
-
-class Game;
-class GameState;
+#include "core/gamestate.h"
 
 class GameStateManager
 {
 public:
-    GameStateManager();
-    ~GameStateManager();
+	static GameStateManager *getInstance();
+	static void release();
 
-	void addState(int, GameState*);
+	void addState(int, GameState *);
 	void loadState(int);
 	bool isStateLoaded(int);
 	void selectState(int);
-	GameState* getCurrentState()
+	GameState *getCurrentState()
 	{
 		return currentGameState;
 	}
-private:
-	Game* game;
-	std::map<int, GameState*> gameStates;
-	GameState* currentGameState;
 
+	void update();
+	void render();
+
+private:
+	static GameStateManager *instance;
+	std::map<int, GameState *> gameStates;
+	GameState *currentGameState;
+
+private:
+	GameStateManager();
+	~GameStateManager();
 };
 
 #endif // !GAMESTATEMANAGER;

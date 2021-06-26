@@ -11,7 +11,8 @@ SDL_Renderer *Game::renderer = nullptr;
 
 Game::Game()
 {
-	gameStateManager = new GameStateManager();
+	gameStateManager = GameStateManager::getInstance();
+	inputManager = InputManager::getInstance();
 }
 
 Game::~Game()
@@ -31,6 +32,7 @@ void Game::init(const char *title, int x, int y, int scale, bool fullscreen)
 	{
 		flags = SDL_WINDOW_FULLSCREEN;
 	}
+	
 	if (SDL_Init(SDL_INIT_EVERYTHING) == 0)
 	{
 		std::cout << "Starting systems..." << std::endl;
@@ -83,7 +85,7 @@ void Game::clear()
 }
 
 void Game::handleEvents()
-{
+{	
 	SDL_Event event;
 	SDL_PollEvent(&event);
 	switch (event.type)
@@ -95,12 +97,14 @@ void Game::handleEvents()
 	default:
 		break;
 	}
+	
+	// Todo: gameStateManager->handleEvents();
 }
 
 void Game::update()
 {
-	InputManager::getInstance()->update();
-	gameStateManager->getCurrentState()->update();
+	inputManager->update();
+	gameStateManager->update();
 }
 
 void Game::render()
@@ -109,7 +113,7 @@ void Game::render()
 	SDL_RenderClear(renderer);
 	//DRAW HERE
 
-	gameStateManager->getCurrentState()->render();
+	gameStateManager->render();
 
 	//END DRAW
 	SDL_RenderPresent(renderer);

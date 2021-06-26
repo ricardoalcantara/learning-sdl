@@ -11,7 +11,6 @@ public:
     MapState();
     ~MapState();
     void load() override;
-    bool isLoaded() override;
     void update() override;
     void render() override;
 

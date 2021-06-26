@@ -31,12 +31,12 @@ void SandboxState::load()
     Mix_Music *music = AssetsManager::LoadMusic("assets/audio/5 Action Chiptunes By Juhani Junkala/Juhani Junkala [Retro Game Music Pack] Title Screen.wav");
     audioPlayer = new Player();
     audioPlayer->addMusic(Musics::intro, music);
+}
+
+void SandboxState::ready()
+{
     audioPlayer->playMusic(Musics::intro);
     audioPlayer->setMusicVolume(40);
-}
-bool SandboxState::isLoaded()
-{
-    return false;
 }
 
 void SandboxState::update()
