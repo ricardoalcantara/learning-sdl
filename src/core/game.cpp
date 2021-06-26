@@ -4,6 +4,7 @@
 #include "core/map.h"
 
 #include <SDL_ttf.h>
+#include <SDL_mixer.h>
 
 SDL_Renderer *Game::renderer = nullptr;
 
@@ -59,12 +60,22 @@ void Game::init(const char *title, int x, int y, int scale, bool fullscreen)
 		std::cout << "TTF_Init: " << TTF_GetError() << std::endl;
 		isRunning = false;
 	}
+
+	if (Mix_OpenAudio(MIX_DEFAULT_FREQUENCY, MIX_DEFAULT_FORMAT, 2, 4096) == -1)
+	{
+		std::cout << "Mix_OpenAudio: " << Mix_GetError() << std::endl;
+		isRunning = false;
+	}
 }
 
 void Game::clear()
 {
 	std::cout << "Game cleaned!" << std::endl;
+	// quit SDL_mixer
+	Mix_CloseAudio();
+	// quit SDL_ttf
 	TTF_Quit();
+	// quit SDL_s
 	SDL_DestroyWindow(window);
 	SDL_DestroyRenderer(renderer);
 	SDL_Quit();

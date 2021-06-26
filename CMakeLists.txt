@@ -16,25 +16,30 @@ if(WIN32)
     SET(SDL2_VERSION "SDL2-2.0.14")
     SET(SDL2IMAGE_VERSION "SDL2_image-2.0.5")
     SET(SDL2TTF_VERSION "SDL2_ttf-2.0.15")
+    SET(SDL2MIXER_VERSION "SDL2_mixer-2.0.4")
 
     set(SDL2_INCLUDE_DIRS "${CMAKE_CURRENT_LIST_DIR}/thirdparty/${SDL2_VERSION}/include")
     set(SDL2IMAGE_INCLUDE_DIRS "${CMAKE_CURRENT_LIST_DIR}/thirdparty/${SDL2IMAGE_VERSION}/include")
     set(SDL2TTF_INCLUDE_DIRS "${CMAKE_CURRENT_LIST_DIR}/thirdparty/${SDL2TTF_VERSION}/include")
+    set(SDL2MIXER_INCLUDE_DIRS "${CMAKE_CURRENT_LIST_DIR}/thirdparty/${SDL2MIXER_VERSION}/include")
 
     # Support both 32 and 64 bit builds
     if (${CMAKE_SIZEOF_VOID_P} MATCHES 8)
         set(SDL2_LIBRARIES_DIR "${CMAKE_CURRENT_LIST_DIR}/thirdparty/${SDL2_VERSION}/lib/x64")
         set(SDL2IMAGE_LIBRARIES_DIR "${CMAKE_CURRENT_LIST_DIR}/thirdparty/${SDL2IMAGE_VERSION}/lib/x64")
         set(SDL2TTF_LIBRARIES_DIR "${CMAKE_CURRENT_LIST_DIR}/thirdparty/${SDL2TTF_VERSION}/lib/x64")
+        set(SDL2MIXER_LIBRARIES_DIR "${CMAKE_CURRENT_LIST_DIR}/thirdparty/${SDL2MIXER_VERSION}/lib/x64")
     else ()
         set(SDL2_LIBRARIES_DIR "${CMAKE_CURRENT_LIST_DIR}/thirdparty/${SDL2_VERSION}/lib/x32")
         set(SDL2IMAGE_LIBRARIES_DIR "${CMAKE_CURRENT_LIST_DIR}/thirdparty/${SDL2IMAGE_VERSION}/lib/x32")
         set(SDL2TTF_LIBRARIES_DIR "${CMAKE_CURRENT_LIST_DIR}/thirdparty/${SDL2TTF_VERSION}/lib/x32")
+        set(SDL2MIXER_LIBRARIES_DIR "${CMAKE_CURRENT_LIST_DIR}/thirdparty/${SDL2MIXER_VERSION}/lib/x32")
     endif ()
 
     set(SDL2_LIBRARIES "${SDL2_LIBRARIES_DIR}/SDL2.lib;${SDL2_LIBRARIES_DIR}/SDL2main.lib")
     set(SDL2IMAGE_LIBRARIES "${SDL2IMAGE_LIBRARIES_DIR}/SDL2_image.lib")
     set(SDL2TTF_LIBRARIES "${SDL2TTF_LIBRARIES_DIR}/SDL2_ttf.lib")
+    set(SDL2MIXER_LIBRARIES "${SDL2MIXER_LIBRARIES_DIR}/SDL2_mixer.lib")
 
     string(STRIP "${SDL2_LIBRARIES}" SDL2_LIBRARIES)
 else()
@@ -43,11 +48,15 @@ else()
     PKG_SEARCH_MODULE(SDL2 REQUIRED sdl2>=2.0.0)
     PKG_SEARCH_MODULE(SDL2IMAGE REQUIRED SDL2_image>=2.0.0)
     PKG_SEARCH_MODULE(SDL2TTF REQUIRED SDL2_ttf>=2.0.0)
+    PKG_SEARCH_MODULE(SDL2MIXER REQUIRED SDL2_mixer>=2.0.0)
 endif()
 
 include_directories(
     ./include
-    ${SDL2_INCLUDE_DIRS} ${SDL2IMAGE_INCLUDE_DIRS} ${SDL2TTF_INCLUDE_DIRS}
+    ${SDL2_INCLUDE_DIRS}
+    ${SDL2IMAGE_INCLUDE_DIRS}
+    ${SDL2TTF_INCLUDE_DIRS}
+    ${SDL2MIXER_INCLUDE_DIRS}
 )
 
 add_executable(learning-sdl
@@ -59,6 +68,8 @@ add_executable(learning-sdl
     src/core/gameobject.cpp
     src/core/gamestatemanager.cpp
 
+    src/audio/player.cpp
+
     src/ui/label.cpp
     src/ui/button.cpp
 
@@ -66,7 +77,12 @@ add_executable(learning-sdl
     src/game/mapstate.cpp
 )
 
-target_link_libraries(learning-sdl ${SDL2_LIBRARIES} ${SDL2IMAGE_LIBRARIES} ${SDL2TTF_LIBRARIES})
+target_link_libraries(learning-sdl
+    ${SDL2_LIBRARIES}
+    ${SDL2IMAGE_LIBRARIES}
+    ${SDL2TTF_LIBRARIES}
+    ${SDL2MIXER_LIBRARIES}
+)
 
 if(WIN32)
     add_custom_command(TARGET learning-sdl POST_BUILD
@@ -75,10 +91,23 @@ if(WIN32)
         COMMAND ${CMAKE_COMMAND} -E copy_if_different "${SDL2IMAGE_LIBRARIES_DIR}/zlib1.dll" $<TARGET_FILE_DIR:learning-sdl>
 
         COMMAND ${CMAKE_COMMAND} -E copy_if_different "${SDL2IMAGE_LIBRARIES_DIR}/SDL2_image.dll" $<TARGET_FILE_DIR:learning-sdl>
+        # COMMAND ${CMAKE_COMMAND} -E copy_if_different "${SDL2IMAGE_LIBRARIES_DIR}/libjpeg-9.dll" $<TARGET_FILE_DIR:learning-sdl>
         COMMAND ${CMAKE_COMMAND} -E copy_if_different "${SDL2IMAGE_LIBRARIES_DIR}/libpng16-16.dll" $<TARGET_FILE_DIR:learning-sdl>
+        # COMMAND ${CMAKE_COMMAND} -E copy_if_different "${SDL2IMAGE_LIBRARIES_DIR}/libtiff-5.dll" $<TARGET_FILE_DIR:learning-sdl>
+        # COMMAND ${CMAKE_COMMAND} -E copy_if_different "${SDL2IMAGE_LIBRARIES_DIR}/libwebp-7.dll" $<TARGET_FILE_DIR:learning-sdl>
 
         COMMAND ${CMAKE_COMMAND} -E copy_if_different "${SDL2TTF_LIBRARIES_DIR}/SDL2_ttf.dll" $<TARGET_FILE_DIR:learning-sdl>
         COMMAND ${CMAKE_COMMAND} -E copy_if_different "${SDL2TTF_LIBRARIES_DIR}/libfreetype-6.dll" $<TARGET_FILE_DIR:learning-sdl>
+     
+        COMMAND ${CMAKE_COMMAND} -E copy_if_different "${SDL2MIXER_LIBRARIES_DIR}/SDL2_mixer.dll" $<TARGET_FILE_DIR:learning-sdl>
+        # COMMAND ${CMAKE_COMMAND} -E copy_if_different "${SDL2MIXER_LIBRARIES_DIR}/libFLAC-8.dll" $<TARGET_FILE_DIR:learning-sdl>
+        # COMMAND ${CMAKE_COMMAND} -E copy_if_different "${SDL2MIXER_LIBRARIES_DIR}/libmodplug-1.dll" $<TARGET_FILE_DIR:learning-sdl>
+        # COMMAND ${CMAKE_COMMAND} -E copy_if_different "${SDL2MIXER_LIBRARIES_DIR}/libmpg123-0.dll" $<TARGET_FILE_DIR:learning-sdl>
+        # COMMAND ${CMAKE_COMMAND} -E copy_if_different "${SDL2MIXER_LIBRARIES_DIR}/libogg-0.dll" $<TARGET_FILE_DIR:learning-sdl>
+        # COMMAND ${CMAKE_COMMAND} -E copy_if_different "${SDL2MIXER_LIBRARIES_DIR}/libopus-0.dll" $<TARGET_FILE_DIR:learning-sdl>
+        # COMMAND ${CMAKE_COMMAND} -E copy_if_different "${SDL2MIXER_LIBRARIES_DIR}/libopusfile-0.dll" $<TARGET_FILE_DIR:learning-sdl>
+        # COMMAND ${CMAKE_COMMAND} -E copy_if_different "${SDL2MIXER_LIBRARIES_DIR}/libvorbis-0.dll" $<TARGET_FILE_DIR:learning-sdl>
+        # COMMAND ${CMAKE_COMMAND} -E copy_if_different "${SDL2MIXER_LIBRARIES_DIR}/libvorbisfile-3.dll" $<TARGET_FILE_DIR:learning-sdl>
     )
 endif()
 
