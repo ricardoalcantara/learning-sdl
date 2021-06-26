@@ -61,6 +61,11 @@ void GameStateManager::selectState(int id)
 	}
 }
 
+void GameStateManager::ready()
+{
+	currentGameState->ready();
+}
+
 void GameStateManager::update()
 {
 	currentGameState->update();

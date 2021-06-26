@@ -20,6 +20,7 @@ public:
 		return currentGameState;
 	}
 
+	void ready();
 	void update();
 	void render();
 

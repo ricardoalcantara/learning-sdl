@@ -25,7 +25,8 @@ int main(int argc, char* args[]) {
 	// Should load only one at time
 	GameStateManager::getInstance()->loadState(GameStateEnum::Sandbox);
 	GameStateManager::getInstance()->loadState(GameStateEnum::Map);
-
+	
+	GameStateManager::getInstance()->ready();
 	while (game->running()) {
 
 		frameStart = SDL_GetTicks();
