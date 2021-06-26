@@ -58,6 +58,7 @@ add_executable(learning-sdl
     src/core/assetsmanager.cpp
     src/core/gameobject.cpp
     src/core/gamestatemanager.cpp
+    src/core/inputmanager.cpp
 
     src/ui/label.cpp
     src/ui/button.cpp

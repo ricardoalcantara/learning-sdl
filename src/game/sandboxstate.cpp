@@ -2,6 +2,7 @@
 #include "core/gameobject.h"
 #include "core/assetsmanager.h"
 #include "core/game.h"
+#include "core/inputmanager.h"
 
 #include <SDL_ttf.h>
 
@@ -27,6 +28,17 @@ bool SandboxState::isLoaded()
 
 void SandboxState::update()
 {
+    if (InputManager::getInstance()->isKeyPressed(SDL_SCANCODE_DOWN))
+    {
+        std::cout << "Key pressed" << std::endl;
+    }
+
+    if (InputManager::getInstance()->isMousePressed(SDL_BUTTON_LEFT))
+    {
+        InputManager::getInstance()->getMousePosition();
+        std::cout << "Mouse pressed" << std::endl;
+    }
+
     player->update();
     label->update();
 }

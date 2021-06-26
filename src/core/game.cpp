@@ -2,6 +2,7 @@
 #include "core/assetsmanager.h"
 #include "core/gameobject.h"
 #include "core/map.h"
+#include "core/inputmanager.h"
 
 #include <SDL_ttf.h>
 
@@ -87,6 +88,7 @@ void Game::handleEvents()
 
 void Game::update()
 {
+	InputManager::getInstance()->update();
 	gameStateManager->getCurrentState()->update();
 }
 
