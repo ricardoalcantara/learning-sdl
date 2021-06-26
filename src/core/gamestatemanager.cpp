@@ -1,6 +1,24 @@
 #include "core/gamestatemanager.h"
 #include "core/gamestate.h"
 
+GameStateManager *GameStateManager::instance = nullptr;
+
+GameStateManager *GameStateManager::getInstance()
+{
+	if (instance == nullptr)
+	{
+		instance = new GameStateManager();
+	}
+
+	return instance;
+}
+
+void GameStateManager::release()
+{
+	delete instance;
+	instance = nullptr;
+}
+
 GameStateManager::GameStateManager()
 {
 }
@@ -41,4 +59,19 @@ void GameStateManager::selectState(int id)
 	{
 		currentGameState = search->second;
 	}
+}
+
+void GameStateManager::ready()
+{
+	currentGameState->ready();
+}
+
+void GameStateManager::update()
+{
+	currentGameState->update();
+}
+
+void GameStateManager::render()
+{
+	currentGameState->render();
 }

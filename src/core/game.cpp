@@ -2,14 +2,17 @@
 #include "core/assetsmanager.h"
 #include "core/gameobject.h"
 #include "core/map.h"
+#include "core/inputmanager.h"
 
 #include <SDL_ttf.h>
+#include <SDL_mixer.h>
 
 SDL_Renderer *Game::renderer = nullptr;
 
 Game::Game()
 {
-	gameStateManager = new GameStateManager();
+	gameStateManager = GameStateManager::getInstance();
+	inputManager = InputManager::getInstance();
 }
 
 Game::~Game()
@@ -29,6 +32,7 @@ void Game::init(const char *title, int x, int y, int scale, bool fullscreen)
 	{
 		flags = SDL_WINDOW_FULLSCREEN;
 	}
+	
 	if (SDL_Init(SDL_INIT_EVERYTHING) == 0)
 	{
 		std::cout << "Starting systems..." << std::endl;
@@ -59,19 +63,29 @@ void Game::init(const char *title, int x, int y, int scale, bool fullscreen)
 		std::cout << "TTF_Init: " << TTF_GetError() << std::endl;
 		isRunning = false;
 	}
+
+	if (Mix_OpenAudio(MIX_DEFAULT_FREQUENCY, MIX_DEFAULT_FORMAT, 2, 4096) == -1)
+	{
+		std::cout << "Mix_OpenAudio: " << Mix_GetError() << std::endl;
+		isRunning = false;
+	}
 }
 
 void Game::clear()
 {
 	std::cout << "Game cleaned!" << std::endl;
+	// quit SDL_mixer
+	Mix_CloseAudio();
+	// quit SDL_ttf
 	TTF_Quit();
+	// quit SDL_s
 	SDL_DestroyWindow(window);
 	SDL_DestroyRenderer(renderer);
 	SDL_Quit();
 }
 
 void Game::handleEvents()
-{
+{	
 	SDL_Event event;
 	SDL_PollEvent(&event);
 	switch (event.type)
@@ -83,11 +97,14 @@ void Game::handleEvents()
 	default:
 		break;
 	}
+	
+	// Todo: gameStateManager->handleEvents();
 }
 
 void Game::update()
 {
-	gameStateManager->getCurrentState()->update();
+	inputManager->update();
+	gameStateManager->update();
 }
 
 void Game::render()
@@ -96,7 +113,7 @@ void Game::render()
 	SDL_RenderClear(renderer);
 	//DRAW HERE
 
-	gameStateManager->getCurrentState()->render();
+	gameStateManager->render();
 
 	//END DRAW
 	SDL_RenderPresent(renderer);

@@ -7,6 +7,7 @@
 
 #include "core/gamestatemanager.h"
 #include "core/gamestate.h"
+#include "core/inputmanager.h"
 
 class GameStateManager;
 
@@ -26,11 +27,6 @@ public:
 		return isRunning;
 	}
 
-	GameStateManager* GetGameStateManager() const
-	{
-		return gameStateManager;
-	}
-
 	static SDL_Renderer* renderer;
 
 private:
@@ -40,6 +36,7 @@ private:
 
 	SDL_Window* window;
 	GameStateManager* gameStateManager;
+	InputManager *inputManager;
 };
 
 #endif 

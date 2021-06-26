@@ -6,11 +6,11 @@
 class GameState
 {
 public:
-public:
-    virtual void load() = 0;
-    virtual bool isLoaded() = 0;
-    virtual void update() = 0;
-    virtual void render() = 0;
+    virtual void load(){};
+    virtual void ready(){};
+    virtual bool isLoaded() { return false; };
+    virtual void update(){};
+    virtual void render(){};
 };
 
 #endif // !GAMESTATE;

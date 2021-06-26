@@ -19,13 +19,14 @@ int main(int argc, char* args[]) {
 	game = new Game();
 	game->init("Game Engine", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 2, false);
 
-	game->GetGameStateManager()->addState( GameStateEnum::Sandbox, new SandboxState());
-	game->GetGameStateManager()->addState( GameStateEnum::Map, new MapState());
+	GameStateManager::getInstance()->addState( GameStateEnum::Sandbox, new SandboxState());
+	GameStateManager::getInstance()->addState( GameStateEnum::Map, new MapState());
 	
 	// Should load only one at time
-	game->GetGameStateManager()->loadState(GameStateEnum::Sandbox);
-	game->GetGameStateManager()->loadState(GameStateEnum::Map);
-
+	GameStateManager::getInstance()->loadState(GameStateEnum::Sandbox);
+	GameStateManager::getInstance()->loadState(GameStateEnum::Map);
+	
+	GameStateManager::getInstance()->ready();
 	while (game->running()) {
 
 		frameStart = SDL_GetTicks();

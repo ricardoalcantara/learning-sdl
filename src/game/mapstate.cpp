@@ -15,10 +15,6 @@ void MapState::load()
     player = new GameObject("assets/player.png", 0 ,0);
     map = new Map();
 }
-bool MapState::isLoaded()
-{
-    return false;
-}
 
 void MapState::update()
 {
