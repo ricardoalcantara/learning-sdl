@@ -87,24 +87,25 @@ void Game::clear()
 void Game::handleEvents()
 {
 	SDL_Event event;
-	SDL_PollEvent(&event);
-	switch (event.type)
-	{
-	case SDL_QUIT:
-		isRunning = false;
-		clear();
-		break;
-	default:
-		break;
-	}
 
-	// Todo: gameStateManager->handleEvents();
+	while (SDL_PollEvent(&event))
+	{
+		if (event.type == SDL_QUIT)
+		{
+			isRunning = false;
+			return;
+		}
+		
+		inputManager->handleEvents(&event);
+		gameStateManager->handleEvents(&event);
+	}
 }
 
 void Game::update()
 {
 	inputManager->update();
 	gameStateManager->update();
+	inputManager->end();
 }
 
 void Game::render()
@@ -126,9 +127,9 @@ void Game::loop()
 
 	Uint32 frameStart;
 	int frameTime;
-	
+
 	std::cout << SDL_GetBasePath() << std::endl;
-	
+
 	while (running())
 	{
 
@@ -145,4 +146,6 @@ void Game::loop()
 			SDL_Delay(frameDelay - frameTime);
 		}
 	}
+
+	clear();
 }

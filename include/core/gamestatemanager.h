@@ -2,6 +2,8 @@
 #define GAMESTATEMANAGER_H
 
 #include <map>
+#include <SDL.h>
+
 #include "core/game.h"
 #include "core/gamestate.h"
 
@@ -21,6 +23,7 @@ public:
 	}
 
 	void ready();
+	void handleEvents(SDL_Event *);
 	void update();
 	void render();
 

@@ -15,6 +15,11 @@ void MyGame::init(const char* title, int x, int y, int scale, bool fullscreen)
 	GameStateManager::getInstance()->loadState(GameStateEnum::Map);
 
 	GameStateManager::getInstance()->ready();
+
+	InputManager::getInstance()->mapKey(SDLK_x, "hook");
+	InputManager::getInstance()->mapKey(SDLK_SPACE, "jump");
+    InputManager::getInstance()->mapKey(SDLK_LEFT, "move_left");
+    InputManager::getInstance()->mapKey(SDLK_RIGHT, "move_right");
 }
 
 void MyGame::update()
