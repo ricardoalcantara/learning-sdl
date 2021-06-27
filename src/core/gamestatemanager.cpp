@@ -66,6 +66,11 @@ void GameStateManager::ready()
 	currentGameState->ready();
 }
 
+void GameStateManager::handleEvents(SDL_Event *)
+{
+
+}
+
 void GameStateManager::update()
 {
 	currentGameState->update();

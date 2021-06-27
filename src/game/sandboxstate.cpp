@@ -52,6 +52,21 @@ void SandboxState::update()
         std::cout << "Mouse pressed" << std::endl;
     }
 
+    if (InputManager::getInstance()->isActionJustPressed("jump"))
+    {
+        std::cout << "Jump" << std::endl;
+    }
+
+    if (InputManager::getInstance()->isActionPressed("move_left"))
+    {
+        std::cout << "Move left" << std::endl;
+    }
+
+    if (InputManager::getInstance()->isActionPressed("move_right"))
+    {
+        std::cout << "Move right" << std::endl;
+    }
+
     player->update();
     label->update();
 }
