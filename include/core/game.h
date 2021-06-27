@@ -16,11 +16,11 @@ public:
 	Game(); // constructor
 	~Game(); // destroyer
 
-	void init(const char* title, int x, int y, int scale, bool fullscreen);
-
 	void handleEvents();
-	void update();
-	void render();
+	virtual void init(const char* title, int x, int y, int scale, bool fullscreen);
+	virtual void update();
+	virtual void render();
+	virtual void loop();
 	void clear();
 
 	bool running() {
