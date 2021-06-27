@@ -32,7 +32,7 @@ void Game::init(const char *title, int x, int y, int scale, bool fullscreen)
 	{
 		flags = SDL_WINDOW_FULLSCREEN;
 	}
-	
+
 	if (SDL_Init(SDL_INIT_EVERYTHING) == 0)
 	{
 		std::cout << "Starting systems..." << std::endl;
@@ -85,7 +85,7 @@ void Game::clear()
 }
 
 void Game::handleEvents()
-{	
+{
 	SDL_Event event;
 	SDL_PollEvent(&event);
 	switch (event.type)
@@ -97,7 +97,7 @@ void Game::handleEvents()
 	default:
 		break;
 	}
-	
+
 	// Todo: gameStateManager->handleEvents();
 }
 
@@ -117,4 +117,32 @@ void Game::render()
 
 	//END DRAW
 	SDL_RenderPresent(renderer);
+}
+
+void Game::loop()
+{
+	const int FPS = 60;
+	const int frameDelay = 1000.0 / FPS;
+
+	Uint32 frameStart;
+	int frameTime;
+	
+	std::cout << SDL_GetBasePath() << std::endl;
+	
+	while (running())
+	{
+
+		frameStart = SDL_GetTicks();
+
+		handleEvents();
+		update();
+		render();
+
+		frameTime = SDL_GetTicks() - frameStart;
+
+		if (frameDelay > frameTime)
+		{
+			SDL_Delay(frameDelay - frameTime);
+		}
+	}
 }

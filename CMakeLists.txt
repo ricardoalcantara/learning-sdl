@@ -74,8 +74,10 @@ add_executable(learning-sdl
     src/ui/label.cpp
     src/ui/button.cpp
 
+    src/game/mygame.cpp
     src/game/sandboxstate.cpp
-    src/game/mapstate.cpp)
+    src/game/mapstate.cpp
+)
 
 target_link_libraries(learning-sdl
     ${SDL2_LIBRARIES}
