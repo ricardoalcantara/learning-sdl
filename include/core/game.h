@@ -30,6 +30,7 @@ public:
 	static SDL_Renderer* renderer;
 
 	int ticksLastFrame = 0;
+	float deltaTime = 0;
 
 private:
 	int ticker = 0;

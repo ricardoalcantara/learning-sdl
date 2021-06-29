@@ -125,7 +125,7 @@ void Game::loop()
 {
 	while (!SDL_TICKS_PASSED(SDL_GetTicks(), ticksLastFrame * FPS));
 
-	float deltaTime = (SDL_GetTicks() - ticksLastFrame) / 1000.0f;
+	deltaTime = (SDL_GetTicks() - ticksLastFrame) / 1000.0f;
 
 	deltaTime = (deltaTime > 0.05f) ? 0.05f : deltaTime;
 
