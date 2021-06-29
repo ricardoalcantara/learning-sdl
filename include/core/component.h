@@ -1,17 +1,18 @@
 #ifndef COMPONENT_H
 #define COMPONENT_H
 
+class Entity;
+#include <vector>
+
 class Component {
 public:
-	Component{} = default;
-	virtual ~Component{} = default;
-
-	Entity* entity;
-
-	virtual bool init() { return true; }
-	virtual void draw() {}
-	virtual void update(){}
+	Entity* owner;
+	virtual ~Component(){}
+	virtual void init (){}
+	virtual void update(){float dt}
+	virtual void render(){}
 private:
+	//nothing
 };
 
 #endif

@@ -7,7 +7,7 @@
 class Map {
 public:
 	Map();
-	~Map();
+	~Map();	
 
 	void LoadMap(int arr[11][10]); //test
 	void DrawMap();
