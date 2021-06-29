@@ -3,6 +3,7 @@
 
 #include <vector>
 #include <string>
+#include "core/component.h"
 
 class Component;
 class EntityManager;
@@ -10,7 +11,7 @@ class EntityManager;
 class Entity {
 private:
 	EntityManager& manager;
-	bool isActive;
+	bool activated;
 	std::vector<Component*> components;
 public:
 	std::string name;
@@ -20,7 +21,7 @@ public:
 	void render();
 	void destroy();
 	bool isActive() {
-		return isActive;
+		return activated;
 	}
 };
 

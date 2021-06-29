@@ -68,6 +68,8 @@ add_executable(learning-sdl
     src/core/gameobject.cpp
     src/core/gamestatemanager.cpp
     src/core/inputmanager.cpp
+    src/core/entity.cpp
+    src/core/entitymanager.cpp
 
     src/audio/player.cpp
 
@@ -76,7 +78,8 @@ add_executable(learning-sdl
 
     src/game/mygame.cpp
     src/game/sandboxstate.cpp
-    src/game/mapstate.cpp)
+    src/game/mapstate.cpp 
+    )
 
 target_link_libraries(learning-sdl
     ${SDL2_LIBRARIES}

@@ -9,7 +9,7 @@ public:
 	Entity* owner;
 	virtual ~Component(){}
 	virtual void init (){}
-	virtual void update(){float dt}
+	virtual void update(float dt){}
 	virtual void render(){}
 private:
 	//nothing
