@@ -29,10 +29,15 @@ public:
 
 	static SDL_Renderer* renderer;
 
+	int ticksLastFrame = 0;
+
 private:
 	int ticker = 0;
 	int scale = 1;
 	bool isRunning;
+	
+	const int FPS = 60;
+	int frameDelay = 1000.0 / FPS;
 
 	SDL_Window* window;
 	GameStateManager* gameStateManager;

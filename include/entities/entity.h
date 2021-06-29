@@ -3,7 +3,7 @@
 
 #include <vector>
 #include <string>
-#include "core/component.h"
+#include "entities/component.h"
 
 class Component;
 class EntityManager;

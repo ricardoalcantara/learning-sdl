@@ -120,10 +120,18 @@ void Game::render()
 	SDL_RenderPresent(renderer);
 }
 
+
 void Game::loop()
 {
-	const int FPS = 60;
-	const int frameDelay = 1000.0 / FPS;
+	while (!SDL_TICKS_PASSED(SDL_GetTicks(), ticksLastFrame * FPS));
+
+	float deltaTime = (SDL_GetTicks() - ticksLastFrame) / 1000.0f;
+
+	deltaTime = (deltaTime > 0.05f) ? 0.05f : deltaTime;
+
+	ticksLastFrame = SDL_GetTicks();
+
+	int timeToWait = FPS - (SDL_GetTicks() - ticksLastFrame);
 
 	Uint32 frameStart;
 	int frameTime;
@@ -132,18 +140,12 @@ void Game::loop()
 
 	while (running())
 	{
-
-		frameStart = SDL_GetTicks();
-
 		handleEvents();
 		update();
 		render();
 
-		frameTime = SDL_GetTicks() - frameStart;
-
-		if (frameDelay > frameTime)
-		{
-			SDL_Delay(frameDelay - frameTime);
+		if (timeToWait > 0 && timeToWait <= FPS) {
+			SDL_Delay(timeToWait);
 		}
 	}
 

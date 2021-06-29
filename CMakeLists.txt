@@ -68,8 +68,8 @@ add_executable(learning-sdl
     src/core/gameobject.cpp
     src/core/gamestatemanager.cpp
     src/core/inputmanager.cpp
-    src/core/entity.cpp
-    src/core/entitymanager.cpp
+    src/entities/entity.cpp
+    src/entities/entitymanager.cpp
 
     src/audio/player.cpp
 
@@ -79,7 +79,7 @@ add_executable(learning-sdl
     src/game/mygame.cpp
     src/game/sandboxstate.cpp
     src/game/mapstate.cpp 
-    )
+     "include/entities/transformComponent.h")
 
 target_link_libraries(learning-sdl
     ${SDL2_LIBRARIES}

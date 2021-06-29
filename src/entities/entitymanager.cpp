@@ -1,4 +1,4 @@
-#include "core/entitymanager.h"
+#include "entities/entitymanager.h"
 
 void EntityManager::clearData() {
 	for (auto& entity:entities) {
