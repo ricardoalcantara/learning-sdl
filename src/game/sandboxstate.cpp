@@ -7,13 +7,32 @@
 
 #include <SDL_ttf.h>
 
-enum Musics
-{
-    intro = 0
-};
-
 SandboxState::SandboxState() : GameState()
 {
+    collisionWorld = new CollisionWorld(Rectangle(Vec2(0, 0), Vec2(320, 176)));
+    entityManager = new EntityManager();
+
+    std::vector<CollisionData *> data;
+
+    TmpEntity player;
+    player.collision = new CollisionData((void *)&player, Rectangle(Vec2(10, 10), Vec2(10, 10)));
+    data.push_back(player.collision);
+    entities.push_back(player);
+
+    TmpEntity plataform1;
+    plataform1.collision = new CollisionData((void *)&plataform1, Rectangle(Vec2(0, 150), Vec2(100, 10)));
+    data.push_back(plataform1.collision);
+    entities.push_back(plataform1);
+
+    TmpEntity plataform2;
+    plataform2.collision = new CollisionData((void *)&plataform2, Rectangle(Vec2(120, 150), Vec2(100, 10)));
+    data.push_back(plataform2.collision);
+    entities.push_back(plataform2);
+
+    for (auto collisionData : data)
+    {
+        collisionWorld->Insert(*collisionData);
+    }
 }
 
 SandboxState::~SandboxState()
@@ -22,58 +41,61 @@ SandboxState::~SandboxState()
 
 void SandboxState::load()
 {
-    TTF_Font *font = AssetsManager::LoadFont("assets/fonts/Roboto/Roboto-Regular.ttf", 25);
-    label = new Label("Hello world", font);
-
-    player = new GameObject("assets/player.png", 0, 0);
-    button = new Button(10, 50, 100, 50);
-
-    Mix_Music *music = AssetsManager::LoadMusic("assets/audio/5 Action Chiptunes By Juhani Junkala/Juhani Junkala [Retro Game Music Pack] Title Screen.wav");
-    audioPlayer = new Player();
-    audioPlayer->addMusic(Musics::intro, music);
 }
 
 void SandboxState::ready()
 {
-    audioPlayer->playMusic(Musics::intro);
-    audioPlayer->setMusicVolume(40);
 }
 
 void SandboxState::update()
 {
-    if (InputManager::getInstance()->isKeyPressed(SDL_SCANCODE_DOWN))
-    {
-        std::cout << "Key pressed" << std::endl;
-    }
-
-    if (InputManager::getInstance()->isMousePressed(SDL_BUTTON_LEFT))
-    {
-        InputManager::getInstance()->getMousePosition();
-        std::cout << "Mouse pressed" << std::endl;
-    }
-
-    if (InputManager::getInstance()->isActionJustPressed("jump"))
-    {
-        std::cout << "Jump" << std::endl;
-    }
+    Vec2 gravity = Vec2(0, 400);
+    Vec2 velocity = Vec2();
 
     if (InputManager::getInstance()->isActionPressed("move_left"))
     {
-        std::cout << "Move left" << std::endl;
+        velocity.x -= 500;
     }
 
     if (InputManager::getInstance()->isActionPressed("move_right"))
     {
-        std::cout << "Move right" << std::endl;
+        velocity.x += 500;
     }
 
-    player->update();
-    label->update();
+    if (InputManager::getInstance()->isActionJustPressed("jump"))
+    {
+        velocity.y -= 1500;
+    }
+
+    // Player
+    entities[0].collision->bounds.position += (velocity + gravity) * 0.0167f;
+    collisionWorld->Update(*entities[0].collision);
+    std::vector<CollisionData *> collisionObjects = collisionWorld->Query(entities[0].collision->bounds);
+
+    for (auto co : collisionObjects)
+    {
+        if (co != entities[0].collision)
+        {
+            if (RectangleOnRectangle(entities[0].collision->bounds, co->bounds))
+            {
+                entities[0].collision->bounds.position.y = co->bounds.position.y - entities[0].collision->bounds.size.y;
+                collisionWorld->Update(*entities[0].collision);
+            }
+        }
+    }
+
+    // std::cout << "position y: " << entities[0].collision->bounds.position.y << std::endl;
+
+    // if (entities[0].collision->bounds.position.y > 150)
+    // {
+    //     entities[0].collision->bounds.position.y = 150;
+    // }
 }
 
 void SandboxState::render()
 {
-    player->render();
-    label->render();
-    button->render();
+    for (auto entity : entities)
+    {
+        entity.render();
+    }
 }

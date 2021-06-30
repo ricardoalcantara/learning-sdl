@@ -3,12 +3,36 @@
 
 #include "core/gamestate.h"
 #include "core/gameobject.h"
-#include "ui/label.h"
-#include "ui/button.h"
-#include "audio/player.h"
+#include "entities/entity.h"
+#include "entities/entitymanager.h"
+#include "physics/quadtree.h"
 
 class SandboxState : public GameState
 {
+public:
+    struct TmpEntity
+    {
+        CollisionData *collision;
+
+        TmpEntity() {}
+
+        void update()
+        {
+        }
+
+        void render()
+        {
+            SDL_Rect rect;
+            rect.x = collision->bounds.position.x;
+            rect.y = collision->bounds.position.y;
+            rect.w = collision->bounds.size.x;
+            rect.h = collision->bounds.size.y;
+
+            SDL_SetRenderDrawColor(Game::renderer, 0, 0, 0, 255);
+            SDL_RenderFillRect(Game::renderer, &rect);
+        }
+    };
+
 public:
     SandboxState();
     ~SandboxState();
@@ -18,10 +42,9 @@ public:
     void render() override;
 
 private:
-    GameObject *player;
-    Label *label;
-    Button *button;
-    Player *audioPlayer;
+    CollisionWorld *collisionWorld;
+    EntityManager *entityManager;
+    std::vector<TmpEntity> entities;
 };
 
 #endif // !SANDBOXSTATE;

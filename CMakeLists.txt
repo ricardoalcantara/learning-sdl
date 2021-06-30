@@ -78,8 +78,11 @@ add_executable(learning-sdl
 
     src/game/mygame.cpp
     src/game/sandboxstate.cpp
-    src/game/mapstate.cpp 
-    )
+    src/game/mapstate.cpp
+
+    src/physics/geometry2d.cpp
+    src/physics/quadtree.cpp
+)
 
 target_link_libraries(learning-sdl
     ${SDL2_LIBRARIES}
