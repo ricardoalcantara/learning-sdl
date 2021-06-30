@@ -1,5 +1,7 @@
 #include "physics/geometry2d.h"
 
+#include <iostream>
+
 #define CMP(x, y)                          \
     (fabsf((x) - (y)) <= __FLT_EPSILON__ * \
                              fmaxf(1.0f, fmaxf(fabsf(x), fabsf(y))))
@@ -141,11 +143,11 @@ bool CircleOnRectangle(const Circle &circle, const Rectangle &rectangle)
 
 bool RectangleOnRectangle(const Rectangle &rectangle1, const Rectangle &rectangle2)
 {
-    Vec2 aMin = rectangle2.position;
-    Vec2 aMax = rectangle2.position + rectangle1.size;
-
+    Vec2 aMin = rectangle1.position;
+    Vec2 aMax = rectangle1.position + rectangle1.size;
+    
     Vec2 bMin = rectangle2.position;
-    Vec2 bMax = rectangle2.position + rectangle1.size;
+    Vec2 bMax = rectangle2.position + rectangle2.size;
 
     bool overX = ((bMin.x <= aMax.x) && (aMin.x <= bMax.x));
     bool overY = ((bMin.y <= aMax.y) && (aMin.y <= bMax.y));

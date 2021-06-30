@@ -39,5 +39,7 @@ public:
 };
 
 typedef QuadTreeNode QuadTree;
+typedef QuadTree CollisionWorld;
+typedef QuadTreeData CollisionData;
 
 #endif

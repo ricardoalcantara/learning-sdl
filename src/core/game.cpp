@@ -7,6 +7,8 @@
 #include <SDL_ttf.h>
 #include <SDL_mixer.h>
 
+#include <sstream>
+
 SDL_Renderer *Game::renderer = nullptr;
 
 Game::Game()
@@ -22,8 +24,8 @@ Game::~Game()
 
 void Game::init(const char *title, int x, int y, int scale, bool fullscreen)
 {
-
-	scale = scale;
+	this->title = title;
+	this->scale = scale;
 	static int width = 320;
 	static int height = 176;
 
@@ -95,7 +97,7 @@ void Game::handleEvents()
 			isRunning = false;
 			return;
 		}
-		
+
 		inputManager->handleEvents(&event);
 		gameStateManager->handleEvents(&event);
 	}
@@ -120,10 +122,10 @@ void Game::render()
 	SDL_RenderPresent(renderer);
 }
 
-
 void Game::loop()
 {
-	while (!SDL_TICKS_PASSED(SDL_GetTicks(), ticksLastFrame * FPS));
+	while (!SDL_TICKS_PASSED(SDL_GetTicks(), ticksLastFrame * FPS))
+		;
 
 	deltaTime = (SDL_GetTicks() - ticksLastFrame) / 1000.0f;
 
@@ -138,15 +140,44 @@ void Game::loop()
 
 	std::cout << SDL_GetBasePath() << std::endl;
 
+	// FPS COUNT
+	float fpsDelta = 0;
+	float fpsDeltaTime = 0;
+	int fpsCount;
+
+	Uint64 now = SDL_GetPerformanceCounter();
+	Uint64 last = 0;
+	// FPS COUNT
+
 	while (running())
 	{
+		// FPS COUNT
+		last = now;
+		now = SDL_GetPerformanceCounter();
+		fpsDeltaTime = (double)((now - last) / (double)SDL_GetPerformanceFrequency());
+		// FPS COUNT
+
 		handleEvents();
 		update();
 		render();
 
-		if (timeToWait > 0 && timeToWait <= FPS) {
+		if (timeToWait > 0 && timeToWait <= FPS)
+		{
 			SDL_Delay(timeToWait);
 		}
+
+		// FPS COUNT
+		fpsDelta += fpsDeltaTime;
+		fpsCount++;
+		if (fpsDelta >= 1.0f)
+		{
+			std::stringstream sstm;
+			sstm << this->title << " - FPS: " << fpsCount;
+			SDL_SetWindowTitle(window, sstm.str().c_str());
+			fpsDelta = 0;
+			fpsCount = 0;
+		}
+		// FPS COUNT
 	}
 
 	clear();
